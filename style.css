@@ -49,7 +49,7 @@
   nav a:focus,
   nav a:hover, 
   nav span {
-     color: grey; 
+     color: black; 
      background-color: white;
   }
  
@@ -57,4 +57,40 @@
   nav a:hover{
     margin-top: 0;
     padding: 1em 0.4em 0.4em;
-  }  
+  } 
+
+
+#footer {   /* Footerbereich */
+    background-color: #FFFFFF;
+    color: grey;
+    height: 80px;
+    width: 100%;
+    min-width: 500px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+#left {     /* Linke Spalte */
+    width: 40%;
+    float: left;
+    padding: 15px 0px 0px 10px;
+    margin: 0px auto 0px auto;
+    text-align: left;
+}
+#center {   /* Mittlere Spalte */
+    width: auto;
+    float: left;
+    padding: 15px 0px 0px 0px;
+    margin: 0px auto 0px auto;
+    text-align: center;
+}
+#right {    /* Rechte Spalte */
+    width: 40%;
+    float: right;
+    padding: 15px 10px 0px 0px;
+    margin: 0px auto 0px auto;
+    text-align: right;
+}
+#clear {    /* Beendet den Float-Bereich */
+    clear: both;
+}
