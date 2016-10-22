@@ -8,7 +8,7 @@
 	
   }
 #logo {
-	margin-left: 200px;
+	margin-left: 10%;
 }
 #nav li{  /* Navigationsleiste horizontal*/
 	display: inline; /*Listenelemente nebeneinander*/
@@ -34,7 +34,27 @@
 	background-color: #848484;
 	padding: 20px 20px;
 }
-
+#h1 {   /* Überschrift*/
+	font-size: 30px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+#textbox {  /*Text mit Rahmen*/
+	
+	
+	border-top: 2px solid green;
+	border-right: 1px solid grey;
+	border-left: 1px solid grey;
+	border-bottom: 1px solid grey;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0 2px 2px grey;
+	margin-bottom: 30px;
+}
+#text {    /*Text in Textbox */
+	-moz-column-width: 270px;
+	-moz-column-gap: 10px;
+	margin: 1%;
+}
 
 #footer {   /* Footerbereich */
     background-color: #FFFFFF;
@@ -72,4 +92,4 @@
     clear: both;
 }
 
-.website {margin: 0px 200px 0px 200px;}
+.website {margin: 0 10% 0 10%;}
