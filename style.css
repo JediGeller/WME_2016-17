@@ -31,7 +31,7 @@
 	
 }
 #nav a:hover {
-	background-color: #848484;
+	background-color: #CCCCCC;
 	padding: 20px 20px;
 }
 #h1 {   /* Überschrift*/
@@ -41,11 +41,11 @@
 }
 #textbox {  /*Text mit Rahmen*/
 	
-	
-	border-top: 2px solid green;
-	border-right: 1px solid grey;
-	border-left: 1px solid grey;
-	border-bottom: 1px solid grey;
+	background-color: #FCFCFC;
+	border-top: 3px solid #67C617;
+	border-right: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
 	border-radius: 0 0 5px 5px;
 	box-shadow: 0 2px 2px grey;
 	margin-bottom: 30px;
@@ -56,20 +56,46 @@
 	margin: 1%;
 }
 
-#filter {
+.filter {
 	color: #CCC7CA;
+	margin-top: 20px;
 }
-#filter a {
+.filter a {
 	color: #CCC7CA;
 	text-decoration: underline;
 }
 
-#filter a:hover {
+.filter a:hover {
 	text-decoration: none;
 	font-weight: bold;
 }
 
+#tabelle { /*Tabelle*/
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+td{
+	padding: 1em;
+	text-align: left;
+	border-bottom: 1px solid #CDCDCD
+}
+th{
+	padding: 0.5em;
+	text-align: left;
+	
+}
+thead th{
+	border-bottom: 2px solid #CDCDCD;
+}
+
+#platz{
+	margin-top: 50px;
+	border-bottom: 2px solid #67C617;
+}
+
 #footer {   /* Footerbereich */
+	
+	
     background-color: #FFFFFF;
     color: grey;
     height: 80px;
@@ -80,10 +106,10 @@
     border: 0px;
 }
 #left {     /* Linke Spalte */
-    font-size: ;
+    font-size: 0.8em;
     width: 40%;
     float: left;
-    padding: 15px 0px 0px 10px;
+    /*padding: 15px 0px 0px 10px;*/
     margin: 0px auto 0px auto;
     text-align: left;
 }
@@ -95,6 +121,7 @@
     text-align: center;
 }
 #right {    /* Rechte Spalte */
+	font-size: 0.8em;
     width: 55%;
     float: right;
     padding: 15px 10px 0px 0px;
