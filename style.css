@@ -56,6 +56,19 @@
 	margin: 1%;
 }
 
+#filter {
+	color: #CCC7CA;
+}
+#filter a {
+	color: #CCC7CA;
+	text-decoration: underline;
+}
+
+#filter a:hover {
+	text-decoration: none;
+	font-weight: bold;
+}
+
 #footer {   /* Footerbereich */
     background-color: #FFFFFF;
     color: grey;
