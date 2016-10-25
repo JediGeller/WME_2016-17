@@ -20,6 +20,7 @@
 #logo {
 	margin-left: 10%;
 	margin-right: 100px;
+	border-right: 1px solid #A4A4A4;
 }
 
 #nav li{  /* Navigationsleiste horizontal*/
@@ -42,18 +43,21 @@
 #nav a {  /*Navbar Schrift*/
 	color: #2E2E2E;
 	text-decoration: none;
-	//align: center;
+	text-align: center;
 	margin-left: 0px;
 	padding-top: 40px;
 	padding-bottom: 25px;
 	padding-left: 20px;
-	padding-rigth: 20px;
+	padding-right: 10px;
+	border-right: 1px solid #A4A4A4;
+	
+	
 }
 
 #nav a:hover {
 	background-color: #CCCCCC;
 	color: #000000;
-	//margin-left: 20px;
+	/*margin-left: 20px;*/
 	padding: 40px 20px 25px 20px;
 
 }
