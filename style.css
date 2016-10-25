@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css?family=Roboto');
+﻿ @import url('https://fonts.googleapis.com/css?family=Roboto');
  .body {
     font: Roboto;
 	font-family: 'Roboto', sans-serif;
@@ -7,12 +7,19 @@
 	line-height: 145%;
 	
   }
+
+.sticky { /* sticky Navbar */
+	position: sticky;
+	top: 0;
+}
 #logo {
 	margin-left: 10%;
 }
 #nav li{  /* Navigationsleiste horizontal*/
 	display: inline; /*Listenelemente nebeneinander*/
 	list-style-type: none;
+  	position: sticky;
+	top: 0;
 }
 #nav {    /* Navbar-Hintergrund*/
 	background-image: linear-gradient(to top, #E6E6E6 0%, #BDBDBD 50%);
@@ -28,7 +35,7 @@
 	padding-top: 10px;
 	padding-bottom: 5px;
 	padding-left: 30px;
-	
+
 }
 #nav a:hover {
 	background-color: #CCCCCC;
@@ -51,8 +58,8 @@
 	margin-bottom: 30px;
 }
 #text {    /*Text in Textbox */
-	-moz-column-width: 270px;
-	-moz-column-gap: 10px;
+	-moz-column-width: 350px;
+	-moz-column-gap: 20px;
 	margin: 1%;
 }
 
