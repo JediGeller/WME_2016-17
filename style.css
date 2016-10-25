@@ -31,26 +31,31 @@
 
 #nav {    /* Navbar-Hintergrund*/
 	background-image: linear-gradient(to top, #E6E6E6 0%, #BDBDBD 50%);
-	padding: 36px 0 36px 0; /*Innenabstand: oben/unten 36px, li/re 0 */
+	padding: 36px 0px 0px 0px; /*Innenabstand: oben/unten 36px, 0px; li/re 0 */
 	border-bottom: 1px solid #A4A4A4;
 	margin-top: 0px;
 	height: 80px;
+	border-left: 5px;
+	border-right: 5px;
 }
 
 #nav a {  /*Navbar Schrift*/
 	color: #2E2E2E;
 	text-decoration: none;
-	text-align: center;
-	margin-left: 50px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 15px;
-	padding-rigth: 15px;
+	//align: center;
+	margin-left: 0px;
+	padding-top: 40px;
+	padding-bottom: 25px;
+	padding-left: 20px;
+	padding-rigth: 20px;
 }
 
 #nav a:hover {
 	background-color: #CCCCCC;
 	color: #000000;
+	//margin-left: 20px;
+	padding: 40px 20px 25px 20px;
+
 }
 
 #h1 {   /* Überschrift*/
@@ -128,14 +133,12 @@ thead th{
     font-size: 0.8em;
     width: 40%;
     float: left;
-    /*padding: 15px 0px 0px 10px;*/
     margin: 0px auto 0px auto;
     text-align: left;
 }
 #center {   /* Mittlere Spalte */
     width: auto;
     float: left;
-    padding: 15px 0px 0px 0px;
     margin: 0px auto 0px auto;
     text-align: center;
 }
@@ -143,10 +146,28 @@ thead th{
     font-size: 0.8em;
     width: 55%;
     float: right;
-    /*padding: 15px 10px 0px 10px; */
     margin: 0px auto 0px auto;
     text-align: right;
 }
 #clear {    /* Float-Bereich beenden */
     clear: both;
+}
+
+//Anpassungen an die Auflösung
+@media screen and (max-width: 575px){
+	col.col5 { visibility: collapse}
+	col.col6 { visibility: collapse}
+	col.col7 { visibility: collapse}
+}
+@media screen and (max-width: 719px){
+	col.col6 { visibility: collapse}
+	col.col7 { visibility: collapse}
+}
+
+@media screen and (max-width: 1079px){
+	col.col7 { visibility: collapse}
+}
+
+@media screen and (max-width >= 1080px){
+
 }
