@@ -1,6 +1,6 @@
 ﻿ @import url('https://fonts.googleapis.com/css?family=Roboto');
  .body {
-    font: Roboto;
+    	font: Roboto;
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 	font-style: normal;
@@ -19,7 +19,6 @@
 
 #logo {
 	margin-left: 10%;
-	margin-right: 100px;
 	border-right: 1px solid #A4A4A4;
 }
 
@@ -36,28 +35,25 @@
 	border-bottom: 1px solid #A4A4A4;
 	margin-top: 0px;
 	height: 80px;
-	border-left: 5px;
-	border-right: 5px;
+
 }
 
 #nav a {  /*Navbar Schrift*/
 	color: #2E2E2E;
 	text-decoration: none;
 	text-align: center;
-	margin-left: 0px;
+	//margin-left: 10px;
 	padding-top: 40px;
 	padding-bottom: 25px;
 	padding-left: 20px;
-	padding-right: 10px;
+	padding-right: 20px;
 	border-right: 1px solid #A4A4A4;
-	
 	
 }
 
 #nav a:hover {
 	background-color: #CCCCCC;
 	color: #000000;
-	/*margin-left: 20px;*/
 	padding: 40px 20px 25px 20px;
 
 }
@@ -86,6 +82,12 @@
 	margin: 1%;
 }
 
+#text a {color: green;}
+
+#text a:hover {
+	text-decoration: none;
+}
+
 .filter {
 	color: #CCC7CA;
 	margin-top: 20px;
@@ -101,7 +103,7 @@
 }
 
 #tabelle { /*Tabelle*/
-	border-collapse: collapse;
+	//border-collapse: collapse;
 	margin-top: 20px;
 }
 td{
@@ -128,10 +130,7 @@ thead th{
     color: grey;
     height: 80px;
     width: 100%;
-    min-width: 500px;
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
+
 }
 #left {     /* Linke Spalte */
     font-size: 0.8em;
@@ -158,7 +157,14 @@ thead th{
 }
 
 //Anpassungen an die Auflösung
-@media screen and (max-width: 575px){
+@media screen and (max-width: 319px){
+	col.col3 { visibility: collapse}
+	col.col4 { visibility: collapse}
+	col.col5 { visibility: collapse}
+	col.col6 { visibility: collapse}
+	col.col7 { visibility: collapse}
+}
+@media screen and (max-width: 479px){
 	col.col5 { visibility: collapse}
 	col.col6 { visibility: collapse}
 	col.col7 { visibility: collapse}
@@ -168,10 +174,6 @@ thead th{
 	col.col7 { visibility: collapse}
 }
 
-@media screen and (max-width: 1079px){
+@media screen and (max-width: 1279px){
 	col.col7 { visibility: collapse}
-}
-
-@media screen and (max-width >= 1080px){
-
 }
