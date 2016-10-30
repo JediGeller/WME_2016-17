@@ -15,14 +15,22 @@
 	<script>
 	
 	<!-- Javascript-Bereich -->
+	/*
 	var db = new Array();
+	//Datenbank
+	db[0] = new Array("009", "DTL", "lel", "666", "67", "45", "34");
+	db[1] = new Array("010", "Werdsd", "sflel", "65666", "6677", "4655", "34212");
+	db[2] = new Array("011", "Prtz", "eerl", "644566", "67", "457", "7034");
 	
-	db[0] = new Array("ID", "Country", "lel");
+	//dynamisches Füllen
 	function tabledynamic () {
-            for (i = 0; i < db.length; i++) {            
-				document.getElementsByTagName("td").innerHTML = "009", "Deutschland", "lel";
-            }  
-        }
+            for (i = 1; i < db.length; i++) {
+				document.getElementsByTagName("tr")[i].innerHTML = document.getElementsByTagName("tr")[i].innerHTML;
+				for (j = 1; j < db.length; j++) {  
+				document.getElementsByTagName("td")[i][j].innerHTML = document.getElementsByTagName("td")[i][j].innerHTML + db[i][j];
+				}
+			}
+        } */
 	</script>
 </head>
 
@@ -136,6 +144,33 @@ shows downloads digital color meter. Glossy tech specs bluetooth manuals. OpenGL
 	<td>Colombia</td>
 	<td>20.605</td>
 	<td>92.34584564</td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>006</td>
+	<td>Colombia</td>
+	<td>20.605</td>
+	<td>92.34584564</td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>007</td>
+	<td>Colombia</td>
+	<td>20.605</td>
+	<td>92.34584564</td>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
 	<td></td>
 	<td></td>
 	<td></td>
