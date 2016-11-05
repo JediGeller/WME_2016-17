@@ -1,5 +1,5 @@
-﻿ @import url('https://fonts.googleapis.com/css?family=Roboto');
- .body {
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto');
+.body {
     	font: Roboto;
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
@@ -13,11 +13,11 @@
 	top: 0;
 }
 
-.website {
-	  margin: 0 10% 0 10%; /* Einrückung */
+.website { /* Einrückung */
+	  margin: 0 10% 0 10%;
 }
 
-#logo {
+#logo { /* Logo */
 	margin-left: 10%;
 	border-right: 1px solid #A4A4A4;
 }
@@ -82,12 +82,14 @@
 	margin: 1%;
 }
 
+/* Links */
 #text a {color: green;}
 
 #text a:hover {
 	text-decoration: none;
 }
 
+/* Filteroptionen für Tabelle */
 .filter {
 	color: #CCC7CA;
 	margin-top: 20px;
@@ -120,12 +122,13 @@ thead th{
 	border-bottom: 2px solid #CDCDCD;
 }
 
+/* Strich über Footer */
 #platz{
 	margin-top: 50px;
 	border-bottom: 2px solid #67C617;
 }
 
-#footer {   /* Footerbereich */
+#footer {   /* Footer */
     background-color: #FFFFFF;
     color: grey;
     height: 80px;
@@ -156,24 +159,28 @@ thead th{
     clear: both;
 }
 
-//Anpassungen an die Auflösung
+/* Anpassungen an die Auflösung */
 @media screen and (max-width: 319px){
-	col.col3 { visibility: collapse}
 	col.col4 { visibility: collapse}
 	col.col5 { visibility: collapse}
 	col.col6 { visibility: collapse}
 	col.col7 { visibility: collapse}
+	.website { margin: 0 2% 0 2% }
+	#nav { height: 160px }
 }
 @media screen and (max-width: 479px){
 	col.col5 { visibility: collapse}
 	col.col6 { visibility: collapse}
 	col.col7 { visibility: collapse}
+	.website { margin: 0 4% 0 4% }
+	#nav { height: 160px }
 }
 @media screen and (max-width: 719px){
 	col.col6 { visibility: collapse}
 	col.col7 { visibility: collapse}
+	.website { margin: 0 6% 0 6% }
 }
-
 @media screen and (max-width: 1279px){
 	col.col7 { visibility: collapse}
+	.website { margin: 0 8% 0 8% }
 }
