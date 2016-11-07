@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"/>
+	<meta name="author" content="Stefanie Macak & André Gleißner">
+	<meta name="description" content="Aufgabe 1 der WME Übung an der TU Dresden im Wintersemester 2016/17. Eine Seite um Daten der Welt anzuzeigen.">
+	<meta name="keywords" content="WME, World Data Overview, TUD, Dresden">
+	<title>World Data Overview</title>
+	<link rel="stylesheet" href="reset.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="font-awesome.css" type="text/css" media="screen"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+	<link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+	<script>
+	<!-- Javascript-Bereich -->
+	/*
+	var db = new Array();
+	//Datenbank
+	db[0] = new Array("009", "DTL", "lel", "666", "67", "45", "34");
+	db[1] = new Array("010", "Werdsd", "sflel", "65666", "6677", "4655", "34212");
+	db[2] = new Array("011", "Prtz", "eerl", "644566", "67", "457", "7034");
+	
+	//dynamisches Füllen
+	function tabledynamic () {
+            for (i = 1; i < db.length; i++) {
+				document.getElementsByTagName("tr")[i].innerHTML = document.getElementsByTagName("tr")[i].innerHTML;
+				for (j = 1; j < db.length; j++) {  
+				document.getElementsByTagName("td")[i][j].innerHTML = document.getElementsByTagName("td")[i][j].innerHTML + db[i][j];
+				}
+			}
+        } */
+	</script>
+</head>
+
+<body onload="tabledynamic ()">
+<div class="body">
+<div class="sticky">
+<header>
+<div id="logo">
+<img src="images/logo_bunt.png" alt="Logo" width="148" height="70" align="left" 
+			onmouseover="src='images/logo_grau.png'" onmouseout="src='images/logo_bunt.png'" />
+</div>
+	<nav id="nav">
+		<ul>
+			<li><a href="javascript:void(0)"><i class="fa fa-list-ul" aria-hidden="true"></i>
+				A1 - Table</a><li>
+			<li><a href="javascript:void(0)"><i class="fa fa-list-ul" aria-hidden="true"></i>
+				A2 - Parse</a><li>
+			<li><a href="javascript:void(0)"><i class="fa fa-list-ul" aria-hidden="true"></i>
+				A2 - Save</a><li>
+			<li><a href="javascript:void(0)"><i class="fa fa-list-ul" aria-hidden="true"></i>
+				A2 - Print</a><li>
+			<li><a href="javascript:void(0)"><i class="fa fa-list-ul" aria-hidden="true"></i>
+				A3 - REST</a><li>
+			<li><a href="javascript:void(0)"><i class="fa fa-list-ul" aria-hidden="true"></i>
+				A4 - Vis</a><li>
+		</ul>
+	</nav>
+</header>
+</div>
+
+<div class="website">
+<h1 id="h1">World Data Overview ...</h1>
+
+<!-- Textbox -->
+<div id="textbox">
+<p id="text">Mavericks reality distortion gradients attenuation. Thought through and through notifications transparency game center multitasking aluminum 
+advanced desktop operating system genius bar. This changes everything designed by Apple in California passbook. Control center photos all-new design SDK 
+technology clock. Simplicity is actually quite complicated. Functional layers 9:41am partly cloudy minimalism. Dock airdrop slide to answer music. Video 
+multitouch iTunes compass. Harmonious finder grid system retina animation compressor experience keynote.
+
+Redesign services API notes system preferences. Features siri flat buttons airplane mode calculator. Missed call cover flow compare models. Wi-Fi apple 
+care volume reminder controls. My stations folders mac power ultimate upgrade. Shop online quicktime trackpad server aperture rumors education safari one 
+to one. Remote desktop motion business. Backlit keyboard chess phone airport extreme support iPad. Accessories magsafe terminal final cut pro. Featured TV 
+shows downloads digital color meter. Glossy tech specs bluetooth manuals. OpenGL products FaceTime free shipping recycling mission control applications. from: <a href="javascript:void(0)">jony_ipsum</a></p>
+</div>
+
+<div class="filter">
+<p><font color=#919995>Show/Hide:</font> <a href="javascript:void(0)">birth rate</a> | <a href="javascript:void(0)">cellphones</a> | 
+	<a href="javascript:void(0)">children/woman</a> | <a href="javascript:void(0)">electric usage</a> | <a href="javascript:void(0)">internet usage</a></p>
+</div>
+
+<!-- Tabelle -->
+<div>
+<table id="tabelle" width="100%">
+<col class="col1">
+<col class="col2">
+<col class="col3">
+<col class="col4">
+<col class="col5">
+<col class="col6">
+<col class="col7">
+<thead>
+<tr>
+	<th>ID</th>
+	<th>Country <i class="fa fa-angle-up" aria-hidden="true"></i>  <i class="fa fa-angle-down" aria-hidden="true"></i></th>
+	<th>birth rate / 1000</th>
+	<th>cellphones / 100</th>
+	<th>children / woman</th>
+	<th>electric usage</th>
+	<th>internet usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+	<td>001</td>
+	<td>Brazil</td>
+	<td>16.405</td>
+	<td>90.01936334</td>
+	<td>1.862</td>
+	<td>2,201.808724</td>
+	<td>39.22</td>
+</tr>
+<tr>
+	<td>002</td>
+	<td>Canada</td>
+	<td>10.625</td>
+	<td>70.70997244</td>
+	<td>1.668</td>
+	<td>15,119.76414</td>
+	<td>80.17086651</td>
+</tr>
+<tr>
+	<td>003</td>
+	<td>Chile</td>
+	<td>15.04</td>
+	<td>97.01862561</td>
+	<td>1.873</td>
+	<td>3,276.06449</td>
+	<td>38.8</td>
+</tr>
+<tr>
+	<td>004</td>
+	<td>China</td>
+	<td>13.536</td>
+	<td>55.97490921</td>
+	<td>1.642</td>
+	<td>2,632.724637</td>
+	<td>28.97659939</td>
+</tr>
+<tr>
+	<td>005</td>
+	<td>Colombia</td>
+	<td>20.605</td>
+	<td>92.34584564</td>
+	<td>2.405</td>
+	<td>1,041.994137</td>
+	<td>30</td>
+</tr>
+<tr>
+	<td>006</td>
+	<td>Ecuador</td>
+	<td>20.989</td>
+	<td>92.84925653</td>
+	<td>2.69</td>
+	<td>1,078.038961</td>
+	<td>24.6</td>
+</tr>
+<tr>
+	<td>007</td>
+	<td>Egypt</td>
+	<td>20.605</td>
+	<td>92.34584564</td>
+	<td>2.69</td>
+	<td>1,078.038961</td>
+	<td>24.28</td>
+</tr>
+<tr>
+	<td>008</td>
+	<td>Finland</td>
+	<td>11.127</td>
+	<td>144.1530224</td>
+	<td>1.86</td>
+	<td>15,241.61194</td>
+	<td>82.53133098</td>
+</tr>
+<tr>
+	<td>009</td>
+	<td>France</td>
+	<td>12.21</td>
+	<td>95.44434226</td>
+	<td>1.978</td>
+	<td>7,339.946832</td>
+	<td>69.0633593</td>
+</tr>
+<tr>
+	<td>010</td>
+	<td>Germany</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<!-- ab hier erfundene Daten -->
+<tr>
+	<td>011</td>
+	<td>Iceland</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>012</td>
+	<td>Iraq</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>013</td>
+	<td>Japan</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>014</td>
+	<td>Kazakhstan</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>015</td>
+	<td>Mexico</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>016</td>
+	<td>New Zealand</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>017</td>
+	<td>Nigeria</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>018</td>
+	<td>Peru</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>019</td>
+	<td>Russia</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>020</td>
+	<td>Saudi Arabia</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>021</td>
+	<td>South Africa</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>022</td>
+	<td>Sweden</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>023</td>
+	<td>United Arab Emirates</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>024</td>
+	<td>United Kingdom</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+<tr>
+	<td>025</td>
+	<td>United States</td>
+	<td>8.136</td>
+	<td>127.4188883</td>
+	<td>1.376</td>
+	<td>6,753.05764</td>
+	<td>79.48523153</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="filter">
+<p><font color=#919995>Show/Hide:</font> <a href="javascript:void(0)">birth rate</a> | <a href="javascript:void(0)">cellphones</a> | 
+	<a href="javascript:void(0)">children/woman</a> | <a href="javascript:void(0)">electric usage</a> | <a href="javascript:void(0)">internet usage</a></p>
+</div>
+
+
+<div id="platz">
+</div>
+
+<div id="footer">
+<div id="left">Copyright <i class="fa fa-copyright" aria-hidden="true"></i> 2016 world_data <br>
+			   First course exercise <strong>HTML, CSS and JS</strong> of the lecture Web and Multimedia Engineering.</div>
+<div id="center"></div>
+<div id="right">This solution has been created by:<br>
+				Stefanie Macak (s5208632) and André Gleißner (s1840921) - Team 19</div>
+<div id="clear"></div>
+</div>
+</div>
+</div>
+</body>
+</html>
