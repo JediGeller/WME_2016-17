@@ -5,53 +5,54 @@ class WorldDataParser{
 	function parseCSV($path){
 		$csv = fopen($path, "r");	//CSV öffnen und nur zum lesen
 		while(!feof($csv)){		//Dateizeiger in der CSV darf nicht am Ende stehen, um alles auslesen zu können
-			$text[] = fgetcsv($csv);
+			$daten[] = fgetcsv($csv);
 		}
-		fclose($csv);
-		return $text;	//Ausgabe
+		fclose($csv);	//schließt die CSV-Datei am Ende
+		return $daten;	//Ausgabe der Daten als Array
 	}
 		
-	function saveXML($parsedCSV){
-		$success = false;
-		$success = true;
-		/*
-		// Erstelle ein neues DomDocument
-		$doc = new DomDocument();
-		$doc->formatOutput = true;
-
-		// Add a root node to the document
-		$root = $doc->createElement('rows');
-		$root = $doc->appendChild($root);
-
-		// Loop through each row creating a <row> node with the correct data
-		while (($row = fgetcsv($inputFile)) !== FALSE){
-			$container = $doc->createElement('row');
-				foreach($headers as $i => $header){
-					$child = $doc->createElement($header);
-					$child = $container->appendChild($child);
-					$value = $doc->createTextNode($row[$i]);
-					$value = $child->appendChild($value);
+	function saveXML($daten){
+		
+		$xmlFile = 'world_data.xml';	//XML-Dateiname
+		$dom = new domDocument('1.0');
+		$dom->encoding = 'UTF-8';
+		$dom->formatOutput = true;
+		$root = $dom->appendChild($dom->createElement("Countries"));
+		
+		$xml = simplexml_import_dom($dom); 
+		
+		//Funktion um Leerzeichen zu löschen
+		//TODO
+		
+		//Arrays in xml
+		function array2xml($array, $xml){				
+			foreach($array as $key => $value){
+				if(is_array($value)){	
+					if(is_numeric($key)){
+						$key = "Country";	//Country trennt Datensätze/Arrays --> Umbenennung		
+					}
+					$subnode = $xml->addChild($key);	
+					array2xml($value, $subnode);	//Rekursiver Aufbau
+				}else{
+					$xml->addChild("$key","$value");	//hinzufügen eines childs
 				}
-
-			$root->appendChild($container);
-		}
-
-		$strxml = $doc->saveXML();
-		$handle = fopen($world_data, "w");
-		fwrite($handle, $strxml);
-		fclose($handle);
-		
-		*/
-		if($success){
-			echo "Daten erfolgreich als XML gespeichert.";
-		}
-		else{
-			echo "Es ist ein Fehler aufgetreten.";
-		}	
+			}						
+		}			
+		array2xml($daten, $xml);	
+		return $xml->asXML($xmlFile);
 	}
-		
+
 	function printXML(){
-		echo "Es wird gedruckt...";
+		/*
+		$xslDom = new DOMDocument(); 
+		$xslDom->load($path_xslt); //XSLT STylesheet laden
+			
+		$xmlDom = new DOMDocument();
+		$xmlDom->load($path_xml); //XML Doc laden
+			
+		$xsltProcessor = new XSLTProcessor();
+		$xsltProcessor->importStylesheet($xslDoc); //Processor lädt Stylesheet
+		*/	
 	}
 }
 ?>
