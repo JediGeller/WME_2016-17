@@ -1,16 +1,16 @@
 ﻿{
-  "name": "TEAM_19",
+  "name": "WME Übung 3",
   "version": "1.0.0",
   "description": "World Data Overview Options",
-  "private": true
+  "private": true,
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "TEAM_19",
   "contributors": [
-	{"name": André Gleißner}
-	{"name": Stefanie Macak}
+	{"name": "André Gleißner"},
+	{"name": "Stefanie Macak"}
   ],
   "license": "ISC",
   "dependencies": {
