@@ -1,1 +1,1 @@
-alert("No ajax calls implemented ;)");
+﻿alert("No ajax calls implemented ;)");
