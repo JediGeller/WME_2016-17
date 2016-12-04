@@ -61,8 +61,14 @@ var http = require('http');
 var fs = require('fs');
 var items;
 
+app.get('/items', function (req, res) {
+    //fs.readFile(__dirname + "/" + "world_data.json", 'utf8', function (err, data) {
         //items = JSON.parse(data);
         items = json;
+        //var allitems = items["id" + req.params.id]
+        var allitems = items;
+        console.log(allitems);
+        res.end(JSON.stringify(allitems));
 });
 
 app.post('/*', function(req, res) { 
