@@ -35,7 +35,7 @@ csvConverter.fromFile("./world_data.csv", function (err, result) {
     console.log(json);
     console.log("json wrote successfully!");
 
-    //zur Formatierung:
+    //Formatierung
     //in JSON String umwandeln
     /*var csvDaten = JSON.stringify
     ([
@@ -47,8 +47,8 @@ csvConverter.fromFile("./world_data.csv", function (err, result) {
     csvDaten = JSON.parse(csvDaten);
     console.log(csvDaten);
     }); */
-    //return json;
-    process.exit();
+    return json;
+    //process.exit(); //stop server, STRG+C
 });
 
 
@@ -57,12 +57,12 @@ csvConverter.fromFile("./world_data.csv", function (err, result) {
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
 
-/*var http = require('http');
+var http = require('http');
+var fs = require('fs');
+var items;
 
-app.get('/*', function (req, res) {
-    console.log('GET-Anfrage wurde entgegengenommen und wird bearbeitet!');
-    res.sendFile(__dirname + '/index.html');
-    //TODO
+        //items = JSON.parse(data);
+        items = json;
 });
 
 app.post('/*', function(req, res) { 
@@ -73,7 +73,7 @@ app.post('/*', function(req, res) {
 app.delete('/*', function(req, res) { 
     //TODO
 });
-*/
+
 
 // DO NOT CHANGE!
 // bind server to port
