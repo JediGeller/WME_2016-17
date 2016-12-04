@@ -33,6 +33,7 @@ var csvConverter = new Converter({});
 csvConverter.fromFile("./world_data.csv", function (err, result) {
     json = result;
     console.log(json);
+    console.log("json wrote successfully!");
 
     //zur Formatierung:
     //in JSON String umwandeln
