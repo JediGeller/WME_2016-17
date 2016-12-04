@@ -46,7 +46,8 @@ csvConverter.fromFile("./world_data.csv", function (err, result) {
     csvDaten = JSON.parse(csvDaten);
     console.log(csvDaten);
     }); */
-    close(); //Bei Abgabe löschen und console.log auskommentieren
+    //return json;
+    process.exit();
 });
 
 
