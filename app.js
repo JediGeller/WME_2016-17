@@ -21,6 +21,7 @@ app.use( express.static( path.join(__dirname, "public") ) );
 **************************************************************************/
 
 var json;
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Gibt csv daten hintereinander aus, speichert
 var csvConverter = new Converter({});
@@ -31,7 +32,7 @@ readStream.pipe(csvConverter).pipe(writeStream);
 //Gibt csv Daten fast gut untereinander aus, in json Variable
 var csvConverter = new Converter({});
 csvConverter.fromFile("./world_data.csv", function (err, result) {
-    json = result;
+    json = result;  //Speicherung in globaler Variable json
     console.log(json);
     console.log("json wrote successfully!");
 
@@ -48,7 +49,6 @@ csvConverter.fromFile("./world_data.csv", function (err, result) {
     console.log(csvDaten);
     }); */
     return json;
-    //process.exit(); //stop server, STRG+C
 });
 
 
@@ -57,27 +57,88 @@ csvConverter.fromFile("./world_data.csv", function (err, result) {
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
 
-var http = require('http');
+//var http = require('http');
 var fs = require('fs');
-var items;
-
+/*
+var country = {
+    id: req.body.id,
+    name: req.body.name,
+    birth_rate_per_1000 : req.body.birthrate
+};
+*/
+//GET Calls
 app.get('/items', function (req, res) {
     //fs.readFile(__dirname + "/" + "world_data.json", 'utf8', function (err, data) {
-        //items = JSON.parse(data);
-        items = json;
-        //var allitems = items["id" + req.params.id]
-        var allitems = items;
-        console.log(allitems);
-        res.end(JSON.stringify(allitems));
-});
-
-app.post('/*', function(req, res) { 
+    //items = JSON.parse(data);
+    //var allitems = items["id" + req.params.id]
+    var allitems = json;
+    console.log(allitems);
+    //res.end(JSON.stringify(allitems));
+    res.json(allitems);
     //res.sendFile(__dirname + '/index.html');
-	//TODO
 });
 
-app.delete('/*', function(req, res) { 
-    //TODO
+app.get('/items/:id', function (req, res) {
+    var id = req.params.id;
+    //Fehler
+    if (id > 25 || id <= 0) {   //vorübergehend 24 als max
+        console.log("No such id " + id + " in database.");
+    }
+    else {
+        var pickeditem = json[--req.params.id]
+        console.log(pickeditem);
+        res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem));
+    }
+});
+
+//TODO
+app.get('/items/:id1/:id2', function (req, res) {
+    var id1 = req.params.id1;
+    var id2 = req.params.id2;
+    //Fehler
+    //console.log("Range not possible.");
+
+    for (id1 <= id2; id1 < id2; id1++){
+        var pickeditem1 = json[--req.params.id1]
+        //var pickeditem2 = json[--req.params.id2]
+        console.log(pickeditem1);
+        //console.log(pickeditem2);
+        res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem1));
+        //res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem2));
+    };
+
+});
+
+app.get('/properties', function (req, res) {
+    var allproperties = json[req];
+    res.end(JSON.stringify(allproperties));
+});
+
+app.get('/properties/num', function (req, res) {
+    //Fehler
+    //console.log("No such property available.");
+});
+
+//POST Calls
+app.post('/items', function(req, res) { 
+    var itemID = req.body.id;
+    res.send(itemID);
+    var newcountry = json;
+    res.end(JSON.stringify(newcountry));
+    console.log("Added country {name} to list!");
+    //console.log(json);
+});
+
+//DELETE Calls
+app.delete('/items', function(req, res) { 
+    console.log("Deleted last country: {name}!");
+});
+
+app.delete('/items/id', function (req, res) {
+    console.log("Item {id} deleted successfully");
+
+    //Fehler
+    //console.log("No such id {id} in database"):
 });
 
 
