@@ -68,25 +68,23 @@ var country = {
 */
 //GET Calls
 app.get('/items', function (req, res) {
-    //fs.readFile(__dirname + "/" + "world_data.json", 'utf8', function (err, data) {
-    //items = JSON.parse(data);
-    //var allitems = items["id" + req.params.id]
     var allitems = json;
-    console.log(allitems);
-    //res.end(JSON.stringify(allitems));
-    res.json(allitems);
-    //res.sendFile(__dirname + '/index.html');
+    //console.log(allitems);
+    res.end(JSON.stringify(allitems));
+    //res.json(allitems);
 });
 
 app.get('/items/:id', function (req, res) {
     var id = req.params.id;
+
     //Fehler
     if (id > 25 || id <= 0) {   //vorübergehend 24 als max
-        console.log("No such id " + id + " in database.");
+        //console.log("No such id " + id + " in database.");
+        res.end("No such id " + id + " in database.");
     }
     else {
         var pickeditem = json[--req.params.id]
-        console.log(pickeditem);
+        //console.log(pickeditem);
         res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem));
     }
 });
@@ -109,36 +107,68 @@ app.get('/items/:id1/:id2', function (req, res) {
 
 });
 
+//TODO
 app.get('/properties', function (req, res) {
-    var allproperties = json[req];
+    json = JSON.parse(json);
+    var allproperties = json["properties"];
+    allproperties = JSON.stringify(allproperties);
     res.end(JSON.stringify(allproperties));
+
 });
 
-app.get('/properties/num', function (req, res) {
+//TODO
+app.get('/properties/:num', function (req, res) {
     //Fehler
     //console.log("No such property available.");
+    //res.end("No such property available.");
 });
 
 //POST Calls
-app.post('/items', function(req, res) { 
-    var itemID = req.body.id;
-    res.send(itemID);
-    var newcountry = json;
-    res.end(JSON.stringify(newcountry));
-    console.log("Added country {name} to list!");
-    //console.log(json);
+app.post('/items', function (req, res) {    //form action="..." setzen??
+
+    var newThing = {
+        country_name: req.body.name,
+        country_birth: req.body.birth_rate_per_1000,
+        country_cellphones: req.body.cell_phones_per_100
+    }
+
+    ++json.length;
+    /*var id = req.body.id;
+    var country_name = req.body.name;
+    var country_birth = req.body.birth_rate_per_1000;
+    var country_cellphones = req.body.cell_phones_per_100; */
+    //json[name] = name;
+   // ++id; //ID wird bei jedem neu erstelltem Land erhöht
+    //console.log("Added country " + country_name + " to list!");
+    //res.end("Added country " + country_name + " to list!");
+
+    console.log(json);
+    json.push(newThing);
+    res.end(JSON.stringify(json));
+    //res.end(JSON.stringify(req.body) + JSON.stringify(json));
 });
 
 //DELETE Calls
-app.delete('/items', function(req, res) { 
-    console.log("Deleted last country: {name}!");
+//TODO
+app.delete('/items', function (req, res) {
+    var name = req.params.name;
+    console.log("Deleted last country: " + name + "!");
+    res.end(JSON.stringify(json));
 });
 
-app.delete('/items/id', function (req, res) {
-    console.log("Item {id} deleted successfully");
-
+app.delete('/items/:id', function (req, res) {
+    var id = req.params.id;
     //Fehler
-    //console.log("No such id {id} in database"):
+    if (id > 25 || id <= 0) {   //vorübergehend 24 als max
+        //console.log("No such id " + id + " in database.");
+        res.end("No such id " + id + " in database.");
+    }
+    else {
+        delete json[--req.params.id]
+        //console.log(json);
+        console.log("Item " + id + " deleted successfully.");
+        res.end(JSON.stringify(json));
+    }
 });
 
 
