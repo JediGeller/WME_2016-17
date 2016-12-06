@@ -104,7 +104,7 @@ app.get('/items/:id1/:id2', function (req, res) {
         //TODO
         if (id1 > id2) {
             var pickeditem2 = new Array();
-            var p = json[id2];
+            var p = json[req.params.id2];
             for (var currentID in p) {
                 pickeditem2.push(currentID)
                 currentID++;
