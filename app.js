@@ -88,39 +88,40 @@ app.get('/items/:id', function (req, res) {
 
 //gibt items mit den IDs im gesuchten Intervall zurück
 app.get('/items/:id1/:id2', function (req, res) {
-    var id1 = req.params.id1;
-    var id2 = req.params.id2;
+    var id1 = --req.params.id1;
+    var id2 = --req.params.id2;
 
     //Fehler
-    if (id1 > json.length || id2 > json.length || id1 <= 0 || id2 <=0) {
+    if (id1 > json.length || id2 > json.length || id1 < 0 || id2 < 0) {
         //console.log("Range not possible.");
         res.end("Range not possible.");
     }
     else {
-        if (id1 = id2) {
+        if (id1 == id2) {
             var pickeditem = json[--req.params.id1]
             res.end(JSON.stringify(pickeditem));
         }
-        //TODO
+        //von klein nach groß
         if (id1 > id2) {
             var pickeditem2 = new Array();
-            var p = json[req.params.id2];
-            for (var currentID in p) {
-                pickeditem2.push(currentID)
-                currentID++;
+            for (i = id2; i <= id1; i++) {
+                pickeditem2.push(json[req.params.id2]);
+                req.params.id2++;
             }
-        res.end(JSON.stringify(pickeditem2));
+            res.end(JSON.stringify(pickeditem2));
         }
-        //TODO
+        //von klein nach groß
         if (id1 < id2) {
             var pickeditem1 = new Array();
-            for(i = id1; id2 >= i; i++){
-                pickeditem1.push(json[i])
-            }      
+            for (i = id1; i <= id2; i++) {
+                pickeditem1.push(json[req.params.id1]);
+                req.params.id1++;
+            }
+            res.end(JSON.stringify(pickeditem1));
         }
         else {
-        res.end("Range not possible."); };
-    //res.end(JSON.stringify(pickeditem2));
+            res.end("Range not possible.");
+        };
     }
 });
 
