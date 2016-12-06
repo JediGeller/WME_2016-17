@@ -1,12 +1,17 @@
 ﻿//alert("No ajax calls implemented ;)");
-
+jQuery.support.cors = true;
 $.ajax({
     type: "GET",
     url: "http://localhost:3000/items",
     async: true,
-    dataType: "jsonp",
-    contentType: 'application/json',
+    //dataType: "jsonp",
+    contentType: "application/json; charset=utf-8",
     success: function (data) {
+        var trHTML = '';
+        $.each(data.id, function (i, item) {
+            trHTML += '<tr><td>' + data.id[i] + '</td><td>' + data.name[i] + '</td><td>' + data.birthrate[i] + '</td></tr>';
+        });
+        $("#table").append(trHTML);
         //$("#country_filter").append(data);
     }, error: function (jgXHR, text, err) {
         alert("Fehler: " + text + " " + err);
@@ -20,9 +25,12 @@ $.ajax({
     dataType: "jsonp",
     contentType: 'application/json',
     success: function (data) {
-        $("#country_filter_id").append(data);
+      /*  $("#add_submit").click(function () {
+            
+        });
+        $("#country_filter_id").append(data);*/
     }, error: function (jgXHR, text, err) {
-        alert("Fehler: " + text + " " + err);
+        //alert("Fehler: " + text + " " + err);
     }
 });
 
@@ -33,9 +41,9 @@ $.ajax({
     dataType: "jsonp",
     contentType: 'application/json',
     success: function (data) {
-        $("#country_filter_range").append(data);
+       // $("#country_filter_range").append(data);
     }, error: function (jgXHR, text, err) {
-        alert("Fehler: " + text + " " + err);
+        //alert("Fehler: " + text + " " + err);
     }
 });
 
@@ -48,7 +56,7 @@ $.ajax({
     success: function (data) {
         $("#prop_selection").append(data);
     }, error: function (jgXHR, text, err) {
-        alert("Fehler: " + text + " " + err);
+        //alert("Fehler: " + text + " " + err);
     }
 });
 
@@ -61,7 +69,7 @@ $.ajax({
     success: function (data) {
         $("#prop_selection").append(data);
     }, error: function (jgXHR, text, err) {
-        alert("Fehler: " + text + " " + err);
+        //alert("Fehler: " + text + " " + err);
     }
 });
 
