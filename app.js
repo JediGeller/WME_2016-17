@@ -52,20 +52,13 @@ csvConverter.fromFile("./world_data.csv", function (err, result) {
 });
 
 
-
 /**************************************************************************
 ********************** handle HTTP METHODS ***********************
 **************************************************************************/
 
 //var http = require('http');
-var fs = require('fs');
-/*
-var country = {
-    id: req.body.id,
-    name: req.body.name,
-    birth_rate_per_1000 : req.body.birthrate
-};
-*/
+//var fs = require('fs');
+
 //GET Calls
 app.get('/items', function (req, res) {
     var allitems = json;
@@ -78,14 +71,14 @@ app.get('/items/:id', function (req, res) {
     var id = req.params.id;
 
     //Fehler
-    if (id > 25 || id <= 0) {   //vorübergehend 24 als max
+    if (id > json.length || id <= 0) {
         //console.log("No such id " + id + " in database.");
         res.end("No such id " + id + " in database.");
     }
     else {
         var pickeditem = json[--req.params.id]
         //console.log(pickeditem);
-        res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem));
+        res.end(JSON.stringify(pickeditem));
     }
 });
 
@@ -94,17 +87,30 @@ app.get('/items/:id1/:id2', function (req, res) {
     var id1 = req.params.id1;
     var id2 = req.params.id2;
     //Fehler
-    //console.log("Range not possible.");
+    if (id1 > json.length || id2 > json.length || id1 <= 0 || id2 <=0) {
+        //console.log("Range not possible.");
+        res.end("Range not possible.");
+    }
+    else {
+        if (id1 = id2) {
+            var pickeditem = json[--req.params.id]
+            res.end(JSON.stringify(pickeditem));
+        }
+        if (id1 > id2) {
 
-    for (id1 <= id2; id1 < id2; id1++){
-        var pickeditem1 = json[--req.params.id1]
-        //var pickeditem2 = json[--req.params.id2]
-        console.log(pickeditem1);
-        //console.log(pickeditem2);
-        res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem1));
-        //res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem2));
-    };
-
+        }
+        if (id1 < id2) {
+            for (id1 <= id2; id1 < id2; id1++) {
+                var pickeditem1 = json[--req.params.id1]
+                //var pickeditem2 = json[--req.params.id2]
+                console.log(pickeditem1);
+                //console.log(pickeditem2);
+                res.end(JSON.stringify(pickeditem1));
+                //res.end("Ihre gesuchte ID: " + JSON.stringify(pickeditem2));
+            };
+        }
+        else { res.end("Range not possible."); };
+    }
 });
 
 //TODO
@@ -125,48 +131,49 @@ app.get('/properties/:num', function (req, res) {
 
 //POST Calls
 app.post('/items', function (req, res) {    //form action="..." setzen??
+    //festlegen der Parameter auf der Website, ID automatisch um 1 erhöhen
+    var id = json.length + 1;
+    var name = req.body.country_name;
+    var birthrateper1000 = req.body.country_birth;
+    var cellphonesper100 = req.body.country_cellphone;
 
-    var newThing = {
-        country_name: req.body.name,
-        country_birth: req.body.birth_rate_per_1000,
-        country_cellphones: req.body.cell_phones_per_100
+    //Vorlage für neues Land
+    var newItem = {
+        id: id,
+        name: name,
+        birth_rate_per_1000: birthrateper1000,
+        cell_phones_per_100: cellphonesper100
     }
 
-    ++json.length;
-    /*var id = req.body.id;
-    var country_name = req.body.name;
-    var country_birth = req.body.birth_rate_per_1000;
-    var country_cellphones = req.body.cell_phones_per_100; */
-    //json[name] = name;
-   // ++id; //ID wird bei jedem neu erstelltem Land erhöht
-    //console.log("Added country " + country_name + " to list!");
-    //res.end("Added country " + country_name + " to list!");
-
-    console.log(json);
-    json.push(newThing);
-    res.end(JSON.stringify(json));
-    //res.end(JSON.stringify(req.body) + JSON.stringify(json));
+    //Hinzufügen in Array an Stelle id
+    json.splice(id, 0, newItem);
+    //console.log(json);
+    res.end("Added country " + name + " to list!");
 });
 
 //DELETE Calls
-//TODO
 app.delete('/items', function (req, res) {
     var name = req.params.name;
+    var id = json.length;
+    //get.name?? - Name an der Stelle bekommen, wie?
+    json.splice(--id, 1);
     console.log("Deleted last country: " + name + "!");
+    res.end("Deleted last country: " + name + "!");
     res.end(JSON.stringify(json));
 });
 
 app.delete('/items/:id', function (req, res) {
     var id = req.params.id;
     //Fehler
-    if (id > 25 || id <= 0) {   //vorübergehend 24 als max
+    if (id > json.length || id <= 0) {
         //console.log("No such id " + id + " in database.");
         res.end("No such id " + id + " in database.");
     }
     else {
-        delete json[--req.params.id]
+        //delete json[--req.params.id]
+        json.splice(--id, 1);
         //console.log(json);
-        console.log("Item " + id + " deleted successfully.");
+        console.log("Item " + ++id + " deleted successfully.");
         res.end(JSON.stringify(json));
     }
 });
