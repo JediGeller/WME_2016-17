@@ -183,13 +183,9 @@ app.post('/items', function (req, res) {    //form action="..." setzen??
 //DELETE Calls
 //löscht item, welches an letzter Stelle steht
 app.delete('/items', function (req, res) {
-    var name = req.params.name;
     var id = json.length;
-
-    //TODO Namen bekommen an Stelle id
-    // Ansatz
-    //name = json[req.params.id + name];
-
+    var name = json[json.length - 1].name;
+    json.splice(--id, 1);
     //console.log(json);
     //console.log("Deleted last country: " + name + "!");
     res.end("Deleted last country: " + name + "!");
