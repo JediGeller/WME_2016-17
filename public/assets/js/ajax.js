@@ -8,10 +8,10 @@ $.ajax({
     contentType: "application/json; charset=utf-8",
     success: function (data) {
         var trHTML = '';
-        $.each(data.i, function (i, item) {
+        $.each(data, function (i, item) {
             trHTML += '<tr><td>' + data.id[i] + '</td><td>' + data.name[i] + '</td><td>' + data.birthrate[i] + '</td></tr>';
         });
-        $("#table").append(trHTML);
+        $("#table_body").append(trHTML);
         //$("#country_filter").append(data);
     }, error: function (jgXHR, text, err) {
         alert("Fehler: " + text + " " + err);
