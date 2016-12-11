@@ -1,21 +1,26 @@
 ﻿//alert("No ajax calls implemented ;)");
 jQuery.support.cors = true;
+var $ = require('jquery');
 $.ajax({
     type: "GET",
     url: "http://localhost:3000/items",
     async: true,
-    //dataType: "jsonp",
+    dataType: "jsonp",
     contentType: "application/json; charset=utf-8",
     success: function (data) {
-        var trHTML = '';
-        $.each(data, function (i, item) {
-            trHTML += '<tr><td>' + data.id[i] + '</td><td>' + data.name[i] + '</td><td>' + data.birthrate[i] + '</td></tr>';
+        $('#add_submit').click(function (e) {
+            e.preventDefault();
+            var trHTML = '';
+            var id = $(data).find('id').val();
+            $.each(data, function (id, item) {
+                trHTML += '<tr><td>' + data.id[i] + '</td><td>' + data.name[i] + '</td><td>' + data.birthrate[i] + '</td></tr>';
+            });
+            $("#table_body").append(trHTML);
+            //$("#country_filter").append(data);
         });
-        $("#table_body").append(trHTML);
-        //$("#country_filter").append(data);
-    }, error: function (jgXHR, text, err) {
-        alert("Fehler: " + text + " " + err);
-    }
+        }, error: function (jgXHR, text, err) {
+            alert("Fehler: " + text + " " + err);
+        }
 });
 
 $.ajax({
