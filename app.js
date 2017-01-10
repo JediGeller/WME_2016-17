@@ -5,6 +5,12 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var Converter = require("csvtojson").Converter;
 
+var d3 = require("d3"),
+    jsdom = require("jsdom");
+
+//var document = jsdom.jsdom(),
+ //   svg = d3.select(document.body).append("svg");
+
 //register body-parser to handle json from res / req
 app.use( bodyParser.json() );
 
@@ -14,15 +20,35 @@ app.use( express.static( path.join(__dirname, "public") ) );
 /**************************************************************************
 ****************************** csv2json *********************************
 **************************************************************************/
+
+var jsonObject;
+
 //Converter Class -> read csv file and create jsonObj
 var converter = new Converter({
     delimiter: ";"
 });
 var jsonStruct_countrys = "";
+
+/*
+d3.csv("./world_data.csv", function (data) {
+    //jsonObject = data;
+    console.log(data);
+    //return jsonObject;
+}); */
+
+//csv-Datei einlesen und in json Varriable speichern
+converter.fromFile("./world_data.csv", function (err, result) {
+    jsonObject = result;  //Speicherung in globaler Variable jsonObject
+    console.log(jsonObject);
+    console.log("json wrote successfully!");
+
+    return jsonObject;
+});
+
 //end_parsed will be emitted once parsing finished
 converter.on("end_parsed", function (jsonObject) {
    jsonStruct_countrys = jsonObject;
-   updateJSONFile();
+   //updateJSONFile(jsonObject);
 });
 
 /**************************************************************************

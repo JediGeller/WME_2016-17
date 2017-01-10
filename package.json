@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "wme_rest_api",
   "version": "1.0.0",
   "description": "World Data Overview Options",
@@ -9,13 +9,19 @@
   },
   "author": "TEAM_19",
   "contributors": [
-	{"name": "André Gleißner"},
-	{"name": "Stefanie Macak"}
+    {
+      "name": "André Gleißner"
+    },
+    {
+      "name": "Stefanie Macak"
+    }
   ],
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
     "csvtojson": "^0.4.8",
-    "express": "^4.14.0"
+    "d3": "^4.4.1",
+    "express": "^4.14.0",
+    "jsdom": "^9.9.1"
   }
 }
