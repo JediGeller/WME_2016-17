@@ -16,7 +16,25 @@
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
     <style>
-        #mapid { height: 500px; }
+
+        #osmap { height: 500px;
+                 width: 50%;
+                 float: right;
+        }
+
+        #visualize_sec {
+            width: 100%;
+        }
+
+        #leftsite {
+            width: 50%;
+            float: left;
+        }
+
+        #chart1 {
+            margin-bottom: 50px;
+        }
+
     </style>
 </head>
 
@@ -50,8 +68,13 @@
 
 <div class="container">
 	<section id="visualize_sec">
-        <div id="chart1"></div>
-        <div id="mapid"></div>
+        <div id="leftsite">
+            <div id="selectbox1"></div>
+            <div id="chart1"></div>
+            <div id="selectbox2"></div>
+            <div id="chart2"></div>
+        </div>
+        <div id="osmap"></div>
 	</section>
 </div>
 

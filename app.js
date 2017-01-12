@@ -5,6 +5,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var Converter = require("csvtojson").Converter;
 
+var $ = require('jQuery');
+
 var d3 = require("d3"),
     jsdom = require("jsdom");
 
@@ -58,6 +60,14 @@ converter.on("end_parsed", function (jsonObject) {
 app.get('/properties', function (req, res) {
     var keys = Object.keys(jsonStruct_countrys[0]);
     res.send( keys );
+});
+
+//gibt alle items zurück
+app.get('/items', function (req, res) {
+    var allitems = jsonObject;
+    //console.log(allitems);
+    res.end(JSON.stringify(allitems));
+    //res.json(allitems);
 });
 
 // bind server to port
