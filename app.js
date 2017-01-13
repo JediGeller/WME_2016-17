@@ -7,8 +7,8 @@ var Converter = require("csvtojson").Converter;
 
 var $ = require('jQuery');
 
-var d3 = require("d3"),
-    jsdom = require("jsdom");
+var d3 = require('d3'),
+    jsdom = require('jsdom');
 
 //var document = jsdom.jsdom(),
  //   svg = d3.select(document.body).append("svg");
@@ -31,17 +31,17 @@ var converter = new Converter({
 });
 var jsonStruct_countrys = "";
 
-/*
-d3.csv("./world_data.csv", function (data) {
-    //jsonObject = data;
-    console.log(data);
-    //return jsonObject;
-}); */
+
+//d3.csv("world_data.csv", function (data) {
+//    //jsonObject = data;
+//    console.log(data);
+//    //return jsonObject;
+//});
 
 //csv-Datei einlesen und in json Varriable speichern
 converter.fromFile("./world_data.csv", function (err, result) {
     jsonObject = result;  //Speicherung in globaler Variable jsonObject
-    console.log(jsonObject);
+    //console.log(jsonObject);
     console.log("json wrote successfully!");
 
     return jsonObject;
@@ -50,7 +50,7 @@ converter.fromFile("./world_data.csv", function (err, result) {
 //end_parsed will be emitted once parsing finished
 converter.on("end_parsed", function (jsonObject) {
    jsonStruct_countrys = jsonObject;
-   //updateJSONFile(jsonObject);
+   //updateJSONFile();
 });
 
 /**************************************************************************
