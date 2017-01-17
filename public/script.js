@@ -6,6 +6,32 @@
 
 var dataset = [];
 
+//Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+// set the dimensions and margins of the graph
+var margin = { top: 20, right: 20, bottom: 30, left: 40 },
+    //width = 550 - margin.left - margin.right,
+    width = screen.width * 0.5 - margin.left - margin.right,
+    height = 250 - margin.top - margin.bottom;
+
+// set the ranges
+var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.1);
+var y = d3.scaleLinear()
+          .range([height, 0]);
+
+// append a 'group' element to 'svg'
+// moves the 'group' element to the top left margin
+var svg = d3.select("#chart1").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+
 //csv parsing
 d3.csv("world_data.csv", function (data) {
     //console.log(data);
@@ -21,6 +47,34 @@ d3.csv("world_data.csv", function (data) {
         var currentname = data[i].name;
     }
 
+    data.forEach(function (d) {
+        d.id = +d.id;
+    });
+
+
+    // Barchart 1
+    // Scale the range of the data in the domains
+    x.domain(data.map(function (d) { return d.name; }));
+    y.domain([0, d3.max(data, function (d) { return d.id; })]);
+
+    // append the rectangles for the bar chart
+    svg.selectAll("#chart1")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function (d) { return x(d.name); })
+        .attr("width", x.bandwidth())
+        .attr("y", function (d) { return y(d.id); })
+        .attr("height", function (d) { return height - y(d.id); });
+
+    // add the x Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    // add the y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y));
 
     //alte Funktion
     //d3.csv("world_data.csv", function (csv) {
@@ -33,92 +87,39 @@ d3.csv("world_data.csv", function (data) {
     //    });
     //});
 
-    //Width and height
-    var w = 500;
-    var h = 100;
-    var barPadding = 1;
-
     //var dataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13, 11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
     var data1 = properties;
     var data2 = properties;
 
-    // Barchart 1
-
-    //var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-
-    //var y = d3.scale.linear().range([height, 0]);
-
-    //var xAxis = d3.svg.axis()
-    //    .scale(x)
-    //    .orient("bottom")
-    //    .tickFormat(d3.time.format("%Y-%m"));
-
-    //var yAxis = d3.svg.axis()
-    //    .scale(y)
-    //    .orient("left")
-    //    .ticks(10);
-
-    //var convert = {
-    //    x1: d3.scale.ordinal(),
-    //    y1: d3.scale.linear()
-    //};
-    //// Define your axis
-    //var axis = {
-    //    x1: d3.svg.axis().orient('bottom'),
-    //    y1: d3.svg.axis().orient('left')
-    //};
-
-    //// Define the conversion function for the axis points
-    //axis.x1.scale(convert.x1);
-    //axis.y1.scale(convert.y1);
-
-    var svg = d3.select("#chart1")
-                .append("svg")
-                .attr("width", w)
-                .attr("height", h);
-
-    svg.selectAll("rect")
-       .data(dataset)
-       .enter()
-       .append("rect")
-       .attr("x", function (d, i) {
-           return i * (dataset.name);
-       })
-       .attr("y", function (d) {
-           return h - (d * 4);
-       })
-       .attr("width", w / dataset.length - barPadding)
-       .attr("height", function (d) {
-           return d * 4;
-       });
-
     // Barchart 2
-    var svg = d3.select("#chart2")
-                .append("svg")
-                .attr("width", w)
-                .attr("height", h);
+    //var svg = d3.select("#chart2")
+    //            .append("svg")
+    //            .attr("width", w)
+    //            .attr("height", h);
 
-    svg.selectAll("rect")
-       .data(dataset)
-       .enter()
-       .append("rect")
-       .attr("x", function (d, i) {
-           return i * (w / dataset.length);
-       })
-       .attr("y", function (d) {
-           return h - (d * 4);
-       })
-       .attr("width", w / dataset.length - barPadding)
-       .attr("height", function (d) {
-           return d * 4;
-       });
+    //svg.selectAll("rect")
+    //   .data(dataset)
+    //   .enter()
+    //   .append("rect")
+    //   .attr("x", function (d, i) {
+    //       return i * (w / dataset.length);
+    //   })
+    //   .attr("y", function (d) {
+    //       return h - (d * 4);
+    //   })
+    //   .attr("width", w / dataset.length - barPadding)
+    //   .attr("height", function (d) {
+    //       return d * 4;
+    //   });
+
+    //var selectedProperty;
 
     // Select-Box 1
     //Source: http://bl.ocks.org/jfreels/6734823
     var select = d3.select('#selectbox1')
       .append('select')
         .attr('class', 'select')
-        .on('change', onchange)
+        .on('change', onchange1)
 
     var options = select
       .selectAll('option')
@@ -126,9 +127,10 @@ d3.csv("world_data.csv", function (data) {
         .append('option')
             .text(function (d) { return d; });
 
-    function onchange() {
-        var selectedProperty = d3.select('select').property('value');
-        return selectedProperty;
+    function onchange1() {
+        selectedProperty = d3.select('select').property('value');
+        console.log(selectedProperty);
+        //return selectedProperty1;
     };
 
     // Select-Box 2
@@ -136,7 +138,7 @@ d3.csv("world_data.csv", function (data) {
     var select = d3.select('#selectbox2')
       .append('select')
         .attr('class', 'select')
-        .on('change', onchange)
+        .on('change', onchange2)
 
     var options = select
       .selectAll('option')
@@ -144,6 +146,11 @@ d3.csv("world_data.csv", function (data) {
         .append('option')
             .text(function (d) { return d; });
 
+    function onchange2() {
+        selectedProperty = d3.select('select').property('value');
+        //console.log(selectedProperty);
+        //return selectedProperty2;
+    };
 
     /**************************************************************************
     ****************************** Leaflet **********************************
@@ -163,10 +170,8 @@ d3.csv("world_data.csv", function (data) {
 
     //Marker für jedes Land
     for (var i = 0; i < dataset.length; ++i) {
-        var selectedProperty;
-        onchange();
         L.marker([dataset[i].gps_lat, dataset[i].gps_long])
-           .bindPopup(selectedProperty + "br/" + dataset[i].name)
+           .bindPopup(properties[0] + '<br> from: ' + dataset[i].name + '<br><br>' + dataset[i].id)
            .addTo(world_map);
     }
 });
