@@ -30,7 +30,6 @@ converter.fromFile("./world_data.csv", function (err, result) {
     jsonObject = result;  //Speicherung in globaler Variable jsonObject
     //console.log(jsonObject);
     console.log("json wrote successfully!");
-
     return jsonObject;
 });
 

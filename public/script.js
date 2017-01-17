@@ -1,4 +1,4 @@
-//alert("Implement D3 and Leaflet stuff here ;)");
+﻿//alert("Implement D3 and Leaflet stuff here ;)");
 
 /**************************************************************************
 ****************************** D3.js ************************************
@@ -6,12 +6,11 @@
 
 var dataset = [];
 
-//Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
-// set the dimensions and margins of the graph
+//Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4   bis csv parsing
+//Größe und Abstände festlegen
 var margin = { top: 20, right: 20, bottom: 30, left: 40 },
-    //width = 550 - margin.left - margin.right,
     width = screen.width * 0.5 - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+    height = 200 - margin.top - margin.bottom;
 
 // set the ranges
 var x = d3.scaleBand()
@@ -22,14 +21,19 @@ var y = d3.scaleLinear()
 
 // append a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
-var svg = d3.select("#chart1").append("svg")
+var barchart1 = d3.select("#chart1").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
-
+var barchart2 = d3.select("#chart2").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
 
 //csv parsing
@@ -49,32 +53,18 @@ d3.csv("world_data.csv", function (data) {
 
     data.forEach(function (d) {
         d.id = +d.id;
+        d.birth_rate_per_1000 = +d.birth_rate_per_1000;
+        d.cell_phones_per_100 = +d.cell_phones_per_100;
+        d.children_per_woman = +d.children_per_woman;
+        d.electricity_consumption_per_capita = +d.electricity_consumption_per_capita;
+        d.gdp_per_capita = +d.gdp_per_capita;
+        d.gdp_per_capita_growth = +d.gdp_per_capita_growth;
+        d.inflation_annual = +d.inflation_annual;
+        d.internet_user_per_100 = +d.internet_user_per_100;
+        d.life_expectancy = +d.life_expectancy;
+        d.military_expenditure_percent_of_gdp = +d.military_expenditure_percent_of_gdp;
     });
 
-
-    // Barchart 1
-    // Scale the range of the data in the domains
-    x.domain(data.map(function (d) { return d.name; }));
-    y.domain([0, d3.max(data, function (d) { return d.id; })]);
-
-    // append the rectangles for the bar chart
-    svg.selectAll("#chart1")
-        .data(data)
-      .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function (d) { return x(d.name); })
-        .attr("width", x.bandwidth())
-        .attr("y", function (d) { return y(d.id); })
-        .attr("height", function (d) { return height - y(d.id); });
-
-    // add the x Axis
-    svg.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
-
-    // add the y Axis
-    svg.append("g")
-        .call(d3.axisLeft(y));
 
     //alte Funktion
     //d3.csv("world_data.csv", function (csv) {
@@ -87,39 +77,72 @@ d3.csv("world_data.csv", function (data) {
     //    });
     //});
 
-    //var dataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13, 11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
+
+    // Barchart 1
+    //Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+    //Daten für die Achsen festlegen und skalieren
+    x.domain(data.map(function (d) { return d.name; }));
+    y.domain([0, d3.max(data, function (d) { return d.id; })]);
+
+    //Rechteckige Stufen für das Diagramm (rect)
+    barchart1.selectAll("#chart1")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function (d) { return x(d.name); })
+        .attr("width", x.bandwidth())
+        .attr("y", function (d) { return y(d.id); })
+        .attr("height", function (d) { return height - y(d.id); })
+        .attr("fill", "grey");
+
+    //X-Achse (unten)
+    barchart1.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    //Y-Achse (links)
+    barchart1.append("g")
+        .call(d3.axisLeft(y));
+
+
+    // Barchart 2
+    //Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+    //Daten für die Achsen festlegen und skalieren
+    x.domain(data.map(function (d) { return d.name; }));
+    y.domain([0, d3.max(data, function (d) { return d.life_expectancy; })]);
+
+    //Rechteckige Stufen für das Diagramm (rect)
+    barchart2.selectAll("#chart2")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function (d) { return x(d.name); })
+        .attr("width", x.bandwidth())
+        .attr("y", function (d) { return y(d.life_expectancy); })
+        .attr("height", function (d) { return height - y(d.life_expectancy); })
+        .attr("fill", "grey");
+
+    //X-Achse (unten)
+    barchart2.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    //Y-Achse (links)
+    barchart2.append("g")
+        .call(d3.axisLeft(y));
+
+
     var data1 = properties;
     var data2 = properties;
 
-    // Barchart 2
-    //var svg = d3.select("#chart2")
-    //            .append("svg")
-    //            .attr("width", w)
-    //            .attr("height", h);
-
-    //svg.selectAll("rect")
-    //   .data(dataset)
-    //   .enter()
-    //   .append("rect")
-    //   .attr("x", function (d, i) {
-    //       return i * (w / dataset.length);
-    //   })
-    //   .attr("y", function (d) {
-    //       return h - (d * 4);
-    //   })
-    //   .attr("width", w / dataset.length - barPadding)
-    //   .attr("height", function (d) {
-    //       return d * 4;
-    //   });
-
-    //var selectedProperty;
+    var selectedProperty = properties[0];
 
     // Select-Box 1
     //Source: http://bl.ocks.org/jfreels/6734823
     var select = d3.select('#selectbox1')
       .append('select')
         .attr('class', 'select')
-        .on('change', onchange1)
+        .on('change', onchange)
 
     var options = select
       .selectAll('option')
@@ -127,18 +150,12 @@ d3.csv("world_data.csv", function (data) {
         .append('option')
             .text(function (d) { return d; });
 
-    function onchange1() {
-        selectedProperty = d3.select('select').property('value');
-        console.log(selectedProperty);
-        //return selectedProperty1;
-    };
-
     // Select-Box 2
     //Source: http://bl.ocks.org/jfreels/6734823
     var select = d3.select('#selectbox2')
       .append('select')
         .attr('class', 'select')
-        .on('change', onchange2)
+        .on('change', onchange)
 
     var options = select
       .selectAll('option')
@@ -146,10 +163,10 @@ d3.csv("world_data.csv", function (data) {
         .append('option')
             .text(function (d) { return d; });
 
-    function onchange2() {
+    function onchange() {
         selectedProperty = d3.select('select').property('value');
-        //console.log(selectedProperty);
-        //return selectedProperty2;
+        console.log(selectedProperty);
+        //return selectedProperty;
     };
 
     /**************************************************************************
@@ -160,7 +177,7 @@ d3.csv("world_data.csv", function (data) {
     var world_map = L.map('osmap').setView([51.0504088, 13.7372621], 2);
     //Source: http://leafletjs.com/
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors | '
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(world_map);
 
     //Bsp-Marker
@@ -168,7 +185,7 @@ d3.csv("world_data.csv", function (data) {
         .bindPopup('Dresden!!!!!!')
         .openPopup();
 
-    //Marker f�r jedes Land
+    //Marker für jedes Land
     for (var i = 0; i < dataset.length; ++i) {
         L.marker([dataset[i].gps_lat, dataset[i].gps_long])
            .bindPopup(properties[0] + '<br> from: ' + dataset[i].name + '<br><br>' + dataset[i].id)
