@@ -4,10 +4,14 @@
 ****************************** D3.js ************************************
 **************************************************************************/
 
+//Anmerkung: Da die Select-Boxen den Wert, wenn sie geändert wurden, nicht richtig übernehmen wurde beispielhaft auf eine statische Option aus dem Datensatz zurückgegriffen, sodass die Darstellung gegeben ist.
+
+
 var dataset = [];
 
 //Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4   bis csv parsing
 //Größe und Abstände festlegen
+//manchmal Browseranzeigefehler (Chart unter Map) - mehrmals aktualisieren bzw. Quelldateien öffnen hilft, Ursache unbekannt
 var margin = { top: 20, right: 20, bottom: 100, left: 40 },
     width = screen.width * 0.5 - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
@@ -95,10 +99,10 @@ d3.csv("world_data.csv", function (data) {
 
     //var options = select
     //  .selectAll('option')
-    //    .data(data1).enter()
+    //    .data(data).enter()
     //    .append('option')
     //        .text(function (d) {
-    //            return d.id
+    //            return d.id;
     //            d.birth_rate_per_1000
     //            d.cell_phones_per_100
     //            d.children_per_woman
@@ -126,12 +130,20 @@ d3.csv("world_data.csv", function (data) {
 
     //Funktion um Wert der Select-Box als Attirbut zu nehmen
     //Funktioniert noch nicht!
+    //Grund ist wahrscheinlich das selectedProperty nicht richtig erkannt wird und damit nicht dem Datensatz zugeordnet werden kann. 
+    //Die Variable an sich wird richtig gelesen (bspw. bei den Popups der Map).
+    //Aber selbst mit dem manuellen Eintragen der Optionen (siehe ab Zeile 97) klappt dies nicht.
+    //siehe Zeile 7
     function onchange() {
         selectedProperty = d3.select('select').property('value');
         //optiondata = options[0][selectedIndex].__data__;
         console.log(selectedProperty);
         //console.log(optiondata);
-        d3.selectAll("#chart1")
+
+        x.domain(data.map(function (d) { return d.name; }));
+        y.domain([0, d3.max(data, function (d) { return selectedProperty; })]);
+
+        barchart1.selectAll("#chart1")
                 .data(data).enter()
                 .append("rect")
                     .attr("class", "bar")
@@ -140,73 +152,75 @@ d3.csv("world_data.csv", function (data) {
                     .attr("y", function (d) { return y(selectedProperty); })
                     .attr("height", function (d) { return height - y(selectedProperty); })
                     .attr("fill", "grey");
-
-        x.domain(data.map(function (d) { return d.name; }));
-        y.domain([0, d3.max(data, function (d) { return selectedProperty; })]);
+        //letitout(selectedProperty);
     };
 
-    // Barchart 1
-    //Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
-    //Daten für die Achsen festlegen und skalieren
-    x.domain(data.map(function (d) { return d.name; }));
-    y.domain([0, d3.max(data, function (d) { return d.id; })]);
+    //function letitout(selectedProperty) {
+        // Barchart 1
+        //siehe Zeile 7
+        //Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+        //Daten für die Achsen festlegen und skalieren
+        x.domain(data.map(function (d) { return d.name; }));
+        y.domain([0, d3.max(data, function (d) { return d.id; })]);
 
-    //Rechteckige Stufen für das Diagramm (rect) und deren Größe
-    barchart1.selectAll("#chart1")
-        .data(data)
-      .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function (d) { return x(d.name); })
-        .attr("width", x.bandwidth())
-        .attr("y", function (d) { return y(d.id); })
-        .attr("height", function (d) { return height - y(d.id); })
-        .attr("fill", "grey");
+        //Rechteckige Stufen für das Diagramm (rect) und deren Größe
+        barchart1.selectAll("#chart1")
+            .data(data)
+          .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) { return x(d.name); })
+            .attr("width", x.bandwidth())
+            .attr("y", function (d) { return y(d.id); })
+            .attr("height", function (d) { return height - y(d.id); })
+            .attr("fill", "grey");
 
-    //add X-Achse (unten)
-    barchart1.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-            .attr("y", -5)
-            .attr("x", 8)
-            .attr("transform", "rotate(90)")
-            .style("text-anchor", "start");
+        //add X-Achse (unten)
+        barchart1.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")      //Beschriftung
+                .attr("y", -5)
+                .attr("x", 8)
+                .attr("transform", "rotate(90)")
+                .style("text-anchor", "start");
 
-    //add Y-Achse (links)
-    barchart1.append("g")
-        .call(d3.axisLeft(y));
+        //add Y-Achse (links)
+        barchart1.append("g")
+            .call(d3.axisLeft(y));
 
 
-    // Barchart 2
-    //Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
-    //Daten für die Achsen festlegen und skalieren
-    x.domain(data.map(function (d) { return d.name; }));
-    y.domain([0, d3.max(data, function (d) { return d.life_expectancy; })]);
+        // Barchart 2
+        //siehe Zeile 7
+        //Source: https://bl.ocks.org/d3noob/bdf28027e0ce70bd132edc64f1dd7ea4
+        //Daten für die Achsen festlegen und skalieren
+        x.domain(data.map(function (d) { return d.name; }));
+        y.domain([0, d3.max(data, function (d) { return d.life_expectancy; })]);
 
-    //Rechteckige Stufen für das Diagramm (rect) und deren Größe
-    barchart2.selectAll("#chart2")
-        .data(data)
-      .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function (d) { return x(d.name); })
-        .attr("width", x.bandwidth())
-        .attr("y", function (d) { return y(d.life_expectancy); })
-        .attr("height", function (d) { return height - y(d.life_expectancy); })
-        .attr("fill", "grey");
+        //Rechteckige Stufen für das Diagramm (rect) und deren Größe
+        barchart2.selectAll("#chart2")
+            .data(data)
+          .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", function (d) { return x(d.name); })
+            .attr("width", x.bandwidth())
+            .attr("y", function (d) { return y(d.life_expectancy); })
+            .attr("height", function (d) { return height - y(d.life_expectancy); })
+            .attr("fill", "grey");
 
-    //add X-Achse (unten)
-    barchart2.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
-    .selectAll("text")
-            .attr("y", -5)
-            .attr("x", 8)
-            .attr("transform", "rotate(90)")
-            .style("text-anchor", "start");
+        //add X-Achse (unten)
+        barchart2.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+        .selectAll("text")      //Beschriftung
+                .attr("y", -5)
+                .attr("x", 8)
+                .attr("transform", "rotate(90)")
+                .style("text-anchor", "start");
 
-    //add Y-Achse (links)
-    barchart2.append("g")
-        .call(d3.axisLeft(y));
+        //add Y-Achse (links)
+        barchart2.append("g")
+            .call(d3.axisLeft(y));
+    //}
 
     /**************************************************************************
     ****************************** Leaflet **********************************
@@ -219,12 +233,13 @@ d3.csv("world_data.csv", function (data) {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(world_map);
 
-    //Bsp-Marker
-    L.marker([51.0504088, 13.7372621]).addTo(world_map)
-        .bindPopup('Dresden!!!!!!')
-        .openPopup();
+    ////Bsp-Marker
+    //L.marker([51.0504088, 13.7372621]).addTo(world_map)
+    //    .bindPopup('Dresden!!!!!!')
+    //    .openPopup();
 
     //Marker für jedes Land
+	//siehe Zeile 7
     for (var i = 0; i < dataset.length; ++i) {
         L.marker([dataset[i].gps_lat, dataset[i].gps_long])
            .bindPopup(properties[0] + '<br> from: ' + dataset[i].name + '<br><br>' + dataset[i].id)
